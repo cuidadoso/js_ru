@@ -8,7 +8,10 @@ export default class Article extends Component {
         }
     }
 
-    toggleClick = () => {
+    toggleClick = (ev) => {
+        ev.preventDefault();
+        console.log('--- React event: ', ev);
+        console.log('--- Native event: ', ev.nativeEvent);
         this.setState({
             isOpen: !this.state.isOpen
         });
