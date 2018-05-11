@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {CommentList} from './';
-import {toggleOpen} from '../decorators'
 
 class Article extends Component {
     static propTypes = {
@@ -57,4 +56,4 @@ class Article extends Component {
     };
 }
 
-export default toggleOpen(Article);
+export default Article;
