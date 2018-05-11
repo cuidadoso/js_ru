@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {CommentList} from './';
+import {toggleOpen} from '../decorators'
 
-export default class Article extends Component {
+class Article extends Component {
     static propTypes = {
         article: PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -12,31 +13,9 @@ export default class Article extends Component {
         }).isRequired
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpen: false
-        }
-    }
-
-    toggleClick = ev => {
-        ev.preventDefault();
-        console.log('--- React event: ', ev);
-        console.log('--- Native event: ', ev.nativeEvent);
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    };
-
-    toggleShowComments = ev => {
-        this.setState({
-            isCommentShow: !this.state.isCommentShow
-        });
-    };
-
     getBody = () => {
-        if(!this.state.isOpen) return null;
-        const {article} = this.props;
+        const {article, isOpen} = this.props;
+        if(!isOpen) return null;
         return <div>
             <section>{article.text}</section>
             <CommentList comments = {article.comments}/>
@@ -44,12 +23,11 @@ export default class Article extends Component {
     };
 
     render() {
-        const {article} = this.props;
-        const {isOpen, isCommentShow} = this.state;
+        const {article, isOpen, toggleOpen} = this.props;
         return (
             <div>
                 <h3>{article.title}</h3>
-                <button onClick={this.toggleClick}>
+                <button onClick={toggleOpen}>
                     {isOpen ? 'close' : 'open'}
                 </button>
                 {this.getBody()}
@@ -58,12 +36,4 @@ export default class Article extends Component {
     };
 }
 
-/*export default function Article(props) {
-    const {article} = props;
-    return (
-        <div>
-            <h3>{article.title}</h3>
-            <section>{article.text}</section>
-        </div>
-    );
-}*/
+export default toggleOpen(Article);
