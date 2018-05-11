@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import {Comment} from './';
 
 export default class CommentList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpen: false
-        }
-    }
+    static defaultProps = {
+        comments: []
+    };
+
+    state = {
+        isOpen: false
+    };
 
     toggleClick = ev => {
         this.setState({
@@ -18,7 +19,7 @@ export default class CommentList extends Component {
     getBody = () => {
         if(!this.state.isOpen) return null;
         const {comments} = this.props;
-        if(!comments || !comments.length) {
+        if(!comments.length) {
             return <p>No comments yet</p>;
         }
         return <ul>
