@@ -18,14 +18,31 @@ class Article extends Component {
         if(!isOpen) return null;
         return <div>
             <section>{article.text}</section>
-            <CommentList comments = {article.comments}/>
+            <CommentList comments = {article.comments} ref = {this.setCommentRef} />
         </div>;
+    };
+
+    setContainerRef = ref => {
+        this.container = ref;
+        console.log('---', ref);
+    };
+
+    setCommentRef = ref => {
+        console.log('---', ref);
+    };
+
+    componentWillReceiveProps(nextProps) {
+        console.log('---', 'updating', this.props.isOpen, nextProps.isOpen);
+    };
+
+    componentWillMount() {
+        console.log('---', 'mounting');
     };
 
     render() {
         const {article, isOpen, toggleOpen} = this.props;
         return (
-            <div>
+            <div ref = {this.setContainerRef}>
                 <h3>{article.title}</h3>
                 <button onClick={toggleOpen}>
                     {isOpen ? 'close' : 'open'}
@@ -33,6 +50,10 @@ class Article extends Component {
                 {this.getBody()}
             </div>
         );
+    };
+
+    componentDidMount() {
+        console.log('---', 'mounted');
     };
 }
 
