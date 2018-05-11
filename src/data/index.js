@@ -1,8 +1,7 @@
 import {
     normalizedComments,
     normalizedArticles,
-    articles,
-
+    articles
 } from './fixtures';
 
 export {

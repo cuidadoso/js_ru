@@ -2,16 +2,11 @@ import React from 'react';
 import {Comment} from './';
 
 export default function CommentList({comments}){
-    let commentElements;
     if(comments) {
-        commentElements = comments.map(comment => <li key={comment.id}><Comment comment = {comment}/></li>);
+        return <ul>
+            {comments.map(comment => <li key={comment.id}><Comment comment = {comment}/></li>)}
+        </ul>;
     } else {
-        commentElements = [];
+        return <p>No comments yet</p>;
     }
-
-    return (
-        <ul>
-            {commentElements}
-        </ul>
-    );
 }

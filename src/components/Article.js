@@ -11,7 +11,7 @@ export default class Article extends Component {
         }
     }
 
-    toggleClick = (ev) => {
+    toggleClick = ev => {
         ev.preventDefault();
         console.log('--- React event: ', ev);
         console.log('--- Native event: ', ev.nativeEvent);
@@ -20,11 +20,11 @@ export default class Article extends Component {
         });
     };
 
-    toggleShowComments = () => {
+    toggleShowComments = ev => {
         this.setState({
             isCommentShow: !this.state.isCommentShow
         });
-    }
+    };
 
     getBody = () => {
         if(!this.state.isOpen) return null;
@@ -36,7 +36,7 @@ export default class Article extends Component {
         if(!this.state.isCommentShow) return null;
         const {article} = this.props;
         return <CommentList comments = {article.comments}/>;
-    }
+    };
 
     render() {
         const {article} = this.props;
