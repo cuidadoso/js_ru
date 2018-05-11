@@ -6,8 +6,7 @@ export default class Article extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false,
-            isCommentShow: false
+            isOpen: false
         }
     }
 
@@ -29,13 +28,10 @@ export default class Article extends Component {
     getBody = () => {
         if(!this.state.isOpen) return null;
         const {article} = this.props;
-        return <section>{article.text}</section>;
-    };
-
-    getComments() {
-        if(!this.state.isCommentShow) return null;
-        const {article} = this.props;
-        return <CommentList comments = {article.comments}/>;
+        return <div>
+            <section>{article.text}</section>
+            <CommentList comments = {article.comments}/>
+        </div>;
     };
 
     render() {
@@ -47,11 +43,7 @@ export default class Article extends Component {
                 <button onClick={this.toggleClick}>
                     {isOpen ? 'close' : 'open'}
                 </button>
-                <button onClick={this.toggleShowComments}>
-                    {isCommentShow ? 'Hide comments' : 'Show comments'}
-                </button>
                 {this.getBody()}
-                {this.getComments()}
             </div>
         );
     };
