@@ -1,5 +1,7 @@
-import React, {Component, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {CSSTransitionGroup} from 'react-transition-group';
+import './article.css'
 
 import {CommentList} from './';
 
@@ -22,9 +24,11 @@ class Article extends PureComponent {
         const {article, isOpen} = this.props;
         if(!isOpen) return null;
         return <div>
-            <section>{article.text}</section>
-            <button onClick={() => this.setState({updateIndex: this.state.updateIndex + 1})}>update</button>
-            <CommentList comments = {article.comments} ref = {this.setCommentRef} key = {this.state.updateIndex} />
+                <section>
+                    {article.text}
+                    <button onClick={() => this.setState({updateIndex: this.state.updateIndex + 1})}>update</button>
+                    <CommentList comments = {article.comments} ref = {this.setCommentRef} key = {this.state.updateIndex} />
+                </section>
         </div>;
     };
 
@@ -50,7 +54,13 @@ class Article extends PureComponent {
                 <button onClick={toggleOpen}>
                     {isOpen ? 'close' : 'open'}
                 </button>
-                {this.getBody()}
+                <CSSTransitionGroup transitionName = 'article'
+                                    transitionAppear = {true}
+                                    transitionAppearTimeout = {500}
+                                    transitionEnterTimeout = {500}
+                                    transitionLeaveTimeout = {300}>
+                    {this.getBody()}
+                </CSSTransitionGroup>
             </div>
         );
     };
