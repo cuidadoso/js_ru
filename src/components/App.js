@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-import {ArticleChart, ArticleList, UserForm} from './';
+import {ArticleChart, ArticleList, Calendar, UserForm} from './';
 
 class App extends  Component {
     static propTypes = {
@@ -32,6 +32,7 @@ class App extends  Component {
                         value = {this.state.selection}
                         onChange = {this.changeSelection}
                         multi />
+                <Calendar/>
                 <ArticleList articles = { this.props.articles} />
                 <ArticleChart articles = { this.props.articles} />
             </div>
