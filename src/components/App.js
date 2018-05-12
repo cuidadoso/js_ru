@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {ArticleList, ArticleChart} from './';
+import {ArticleChart, ArticleList, UserForm} from './';
 
-export default class App extends  Component {
+class App extends  Component {
     static propTypes = {
         articles: PropTypes.array.isRequired
     };
@@ -11,9 +11,12 @@ export default class App extends  Component {
     render() {
         return (
             <div>
+                <UserForm/>
                 <ArticleList articles = { this.props.articles} />
                 <ArticleChart articles = { this.props.articles} />
             </div>
         );
     }
 }
+
+export default App;

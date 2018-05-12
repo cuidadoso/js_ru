@@ -43,6 +43,7 @@ class Article extends PureComponent {
 
     render() {
         const {article, isOpen, toggleOpen} = this.props;
+        console.log('---', 'rendering article');
         return (
             <div ref = {this.setContainerRef}>
                 <h3>{article.title}</h3>
