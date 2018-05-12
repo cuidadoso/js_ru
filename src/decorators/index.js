@@ -1,7 +1,7 @@
 import toggleOpen from './toggleOpen';
-import toggleAccordion from './toggleAccordion';
+import accordion from './accordion';
 
 export {
     toggleOpen,
-    toggleAccordion
+    accordion
 }

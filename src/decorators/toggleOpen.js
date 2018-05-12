@@ -1,6 +1,6 @@
 import React, {Component as ReactComponent} from 'react';
 
-export default (OriginalComponent) => class WrappedComponent extends ReactComponent {
+export default OriginalComponent => class WrappedComponent extends ReactComponent {
     state = {
         isOpen: false
     };
@@ -14,5 +14,13 @@ export default (OriginalComponent) => class WrappedComponent extends ReactCompon
 
     render() {
         return <OriginalComponent {...this.props} {...this.state} toggleOpen = {this.toggleOpen} />
+    };
+
+    componentDidMount() {
+        console.log('---', 'mounted');
+    };
+
+    componentDidUpdate() {
+        console.log('---', 'updated');
     };
 };

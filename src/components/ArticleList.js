@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {Article} from './';
-import {toggleAccordion} from '../decorators';
+import {accordion} from '../decorators';
 
-function ArticleList({articles = [], openArticleId, toggleOpen}) {
+function ArticleList({articles = [], openItemId, toggleOpen}) {
     const articleElements = articles.map(article => <li key={article.id}>
         <Article article = {article}
-                 isOpen = {article.id === openArticleId}
+                 isOpen = {article.id === openItemId}
                  toggleOpen = {toggleOpen(article.id)}
         />
     </li>);
@@ -20,8 +20,9 @@ function ArticleList({articles = [], openArticleId, toggleOpen}) {
 
 ArticleList.propTypes = {
     articles: PropTypes.array.isRequired,
-    openArticleId: PropTypes.string.isRequired,
+    // from accordion decorator
+    openItemId: PropTypes.string,
     toggleOpen: PropTypes.func.isRequired
 };
 
-export default toggleAccordion(ArticleList);
+export default accordion(ArticleList);
