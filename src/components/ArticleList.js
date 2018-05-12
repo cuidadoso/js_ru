@@ -1,36 +1,27 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {Article} from './';
+import {toggleAccordion} from '../decorators';
 
-class ArticleList extends Component {
-    static propTypes = {
-        articles: PropTypes.array.isRequired
-    };
-
-    state = {
-        openArticleId: null
-    };
-
-    toggleOpenArticle = openArticleId => ev =>{
-        this.setState({
-            openArticleId
-        })
-    };
-
-    render() {
-        const articleElements = this.props.articles.map(article => <li key={article.id}>
-            <Article article = {article}
-                     isOpen = {article.id === this.state.openArticleId}
-                     toggleOpen = {this.toggleOpenArticle(article.id)}
-            />
-        </li>);
-        return(
-            <ul>
-                {articleElements}
-            </ul>
-        );
-    }
+function ArticleList({articles = [], openArticleId, toggleOpen}) {
+    const articleElements = articles.map(article => <li key={article.id}>
+        <Article article = {article}
+                 isOpen = {article.id === openArticleId}
+                 toggleOpen = {toggleOpen(article.id)}
+        />
+    </li>);
+    return(
+        <ul>
+            {articleElements}
+        </ul>
+    );
 }
 
-export default ArticleList;
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired,
+    openArticleId: PropTypes.string.isRequired,
+    toggleOpen: PropTypes.func.isRequired
+};
+
+export default toggleAccordion(ArticleList);
