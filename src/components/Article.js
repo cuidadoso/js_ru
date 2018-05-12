@@ -12,12 +12,17 @@ class Article extends Component {
         }).isRequired
     };
 
+    state = {
+        updateIndex: 0
+    };
+
     getBody = () => {
         const {article, isOpen} = this.props;
         if(!isOpen) return null;
         return <div>
             <section>{article.text}</section>
-            <CommentList comments = {article.comments} ref = {this.setCommentRef} />
+            <button onClick={() => this.setState({updateIndex: this.state.updateIndex + 1})}>update</button>
+            <CommentList comments = {article.comments} ref = {this.setCommentRef} key = {this.state.updateIndex} />
         </div>;
     };
 
@@ -34,10 +39,6 @@ class Article extends Component {
         console.log('---', 'updating', this.props.isOpen, nextProps.isOpen);
     };
 
-    componentWillMount() {
-        console.log('---', 'mounting');
-    };
-
     render() {
         const {article, isOpen, toggleOpen} = this.props;
         return (
@@ -49,10 +50,6 @@ class Article extends Component {
                 {this.getBody()}
             </div>
         );
-    };
-
-    componentDidMount() {
-        console.log('---', 'mounted');
     };
 }
 

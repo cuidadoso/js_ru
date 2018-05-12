@@ -12,8 +12,16 @@ export default OriginalComponent => class WrappedComponent extends ReactComponen
         });
     };
 
+    componentWillMount() {
+        console.log('---', 'mounting');
+    };
+
     render() {
         return <OriginalComponent {...this.props} {...this.state} toggleOpen = {this.toggleOpen} />
+    };
+
+    componentWillUnmount() {
+        console.log('---', 'unmounting');
     };
 
     componentDidMount() {
