@@ -5,7 +5,9 @@ import ArticleList from './ArticleList';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
+import Counter from './Counter'
 import Filters from './Filters';
+import Root from './Root';
 import UserForm from './UserForm';
 
 export {
@@ -16,6 +18,8 @@ export {
     Comment,
     CommentForm,
     CommentList,
+    Counter,
     Filters,
+    Root,
     UserForm
 }
