@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
-import './calendar.css';
+import './dateRange.css';
 
-class Calendar extends PureComponent {
+class DateRange extends PureComponent {
     static defaultProps = {
         numberOfMonths: 2,
     };
@@ -15,19 +15,18 @@ class Calendar extends PureComponent {
     };
 
     state = {
-        from: undefined,
-        to: undefined,
+        from: null,
+        to: null,
     };
 
     handleDayClick = (day) => {
-        const range = DateUtils.addDayToRange(day, this.state);
-        this.setState(range);
+        this.setState(DateUtils.addDayToRange(day, this.state));
     };
 
     handleResetClick = () => {
         this.setState({
-            from: undefined,
-            to: undefined,
+            from: null,
+            to: null,
         });
     };
 
@@ -53,7 +52,7 @@ class Calendar extends PureComponent {
         const { from, to } = this.state;
         const modifiers = { start: from, end: to };
        return(
-         <div  className="RangeExample">
+         <div  className="date-range">
              {this.getInfoControll()}
              <DayPicker
                  className="Selectable"
@@ -67,4 +66,4 @@ class Calendar extends PureComponent {
     };
 }
 
-export default Calendar;
+export default DateRange;
