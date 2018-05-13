@@ -1,9 +1,12 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {CSSTransitionGroup} from 'react-transition-group';
-import './style.css'
 
 import {CommentList} from '../';
+import {deleteArticle} from '../../AC';
+
+import './style.css'
 
 class Article extends PureComponent {
     static propTypes = {
@@ -45,6 +48,12 @@ class Article extends PureComponent {
         return nextProps.isOpen !== this.props.isOpen;
     };*/
 
+    handleDelete =() => {
+        const {deleteArticle, article} = this.props;
+        deleteArticle(article.id);
+        console.log('---', 'deleting article');
+    };
+
     render() {
         const {article, isOpen, toggleOpen} = this.props;
         console.log('---', 'rendering article');
@@ -54,6 +63,7 @@ class Article extends PureComponent {
                 <button onClick={toggleOpen}>
                     {isOpen ? 'close' : 'open'}
                 </button>
+                <button onClick = {this.handleDelete}>Delete me</button>
                 <CSSTransitionGroup transitionName = 'article'
                                     transitionAppear = {true}
                                     transitionAppearTimeout = {500}
@@ -66,4 +76,4 @@ class Article extends PureComponent {
     };
 }
 
-export default Article;
+export default connect(null, {deleteArticle})(Article);

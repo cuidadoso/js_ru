@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import store from '../store';
 import {App} from './';
 
-function Root(props) {
+function Root() {
   return (
     <div>
         <Provider store = {store}>
-            <App {...props}/>
+            <App />
         </Provider>
     </div>
   );
