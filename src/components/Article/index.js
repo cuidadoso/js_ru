@@ -51,12 +51,11 @@ class Article extends PureComponent {
     handleDelete =() => {
         const {deleteArticle, article} = this.props;
         deleteArticle(article.id);
-        console.log('---', 'deleting article');
     };
 
     render() {
         const {article, isOpen, toggleOpen} = this.props;
-        console.log('---', 'rendering article');
+        // console.log('---', 'rendering article');
         return (
             <div ref = {this.setContainerRef}>
                 <h3>{article.title}</h3>

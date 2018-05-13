@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import DateRange from './DateRange';
 import SelectFilter from './Select';
 
 class Filters extends Component {
-  static defaultProps = {
-      articles:[]
-  };
-
-  static propTypes = {
-      articles: PropTypes.array
-  };
-
   render() {
     return (
       <div>
-          <SelectFilter articles={this.props.articles} />
-          <DateRange/>
+          <SelectFilter />
+          <DateRange numberOfMonths = {1} />
       </div>
     );
   }

@@ -1,7 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+
+import {setRange, resetDateRange} from '../../AC';
 
 import './dateRange.css';
 
@@ -12,26 +15,27 @@ class DateRange extends PureComponent {
 
     static propTypes = {
         numberOfMonths: PropTypes.number,
-    };
-
-    state = {
-        from: null,
-        to: null,
+        // from connect
+        range: PropTypes.shape({
+            from: PropTypes.date,
+            to: PropTypes.date
+        }),
+        setRange: PropTypes.func.isRequired,
+        resetDateRange: PropTypes.func.isRequired
     };
 
     handleDayClick = (day) => {
-        this.setState(DateUtils.addDayToRange(day, this.state));
+        const {range, setRange} = this.props;
+        setRange(DateUtils.addDayToRange(day, range));
     };
 
     handleResetClick = () => {
-        this.setState({
-            from: null,
-            to: null,
-        });
+        const {resetDateRange} = this.props;
+        resetDateRange();
     };
 
     getInfoControll = () => {
-        const { from, to } = this.state;
+        const { from, to } = this.props.range;
         return <p>
             {!from && !to && 'Please select the first day.'}
             {from && !to && 'Please select the last day.'}
@@ -49,7 +53,7 @@ class DateRange extends PureComponent {
     };
 
     render() {
-        const { from, to } = this.state;
+        const { from, to } = this.props.range;
         const modifiers = { start: from, end: to };
        return(
          <div  className="date-range">
@@ -66,4 +70,9 @@ class DateRange extends PureComponent {
     };
 }
 
-export default DateRange;
+export default connect(state => ({
+    range: state.filters.dateRange,
+}), {
+    setRange,
+    resetDateRange
+})(DateRange);
