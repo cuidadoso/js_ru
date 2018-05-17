@@ -1,4 +1,4 @@
-import {articles as defaultArticles} from '../data';
+import {normalizedArticles as defaultArticles} from '../data';
 import {DELETE_ARTICLE} from '../constatns';
 
 export default (articleState = defaultArticles, action) => {
