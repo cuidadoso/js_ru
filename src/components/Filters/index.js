@@ -8,7 +8,7 @@ class Filters extends Component {
     return (
       <div>
           <SelectFilter />
-          <DateRange numberOfMonths = {1} />
+          <DateRange />
       </div>
     );
   }
