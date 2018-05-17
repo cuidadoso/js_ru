@@ -1,12 +1,13 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import reducer from '../reducer';
 
-const store = createStore(
-    reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // dev only
-);
+import {logger} from '../middlewares';
 
-window.store = store; // dev only
+const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(); // dev only
+
+const enhancer = applyMiddleware(logger);
+
+const store = createStore(reducer, reduxDevTools, enhancer);
 
 export default store;
 
