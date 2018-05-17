@@ -23,7 +23,6 @@ export const commentSelectorFactory = () => createSelector(
     commentsGetter,
     idGetter,
     (comments, id) => {
-        console.log('---', 'get comment');
-        return comments.find(comment => comment.id === id);
+        return comments[id];
     }
 );
