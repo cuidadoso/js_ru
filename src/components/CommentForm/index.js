@@ -39,11 +39,7 @@ class CommentForm extends  Component {
 
     handleSubmit = ev => {
         ev.preventDefault();
-        const {user, text} = this.state;
-        this.props.addComment({
-            user,
-            text
-        }, this.props.articleId);
+        this.props.addComment(this.state);
         this.setState({
             user: '',
             text: ''
@@ -69,4 +65,6 @@ class CommentForm extends  Component {
     }
 }
 
-export default connect(null, {addComment})(CommentForm);
+export default connect(null, (dispatch, ownProps) => ({
+    addComment: (comment) => dispatch(addComment(comment, ownProps.articleId))
+}))(CommentForm);
