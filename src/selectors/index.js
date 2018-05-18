@@ -1,5 +1,4 @@
 import {createSelector} from 'reselect';
-import comments from "../reducer/comments";
 
 const articlesGetter = state => state.articles;
 const filtersGetter = state => state.filters;
