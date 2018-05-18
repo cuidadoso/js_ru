@@ -12,15 +12,15 @@ export default OriginalComponent => class WrappedComponent extends ReactComponen
         });
     };
 
-    componentWillMount() {
+    /*componentWillMount() {
         console.log('---', 'mounting');
-    };
+    };*/
 
     render() {
         return <OriginalComponent {...this.props} {...this.state} toggleOpen = {this.toggleOpen} />
     };
 
-    componentWillUnmount() {
+    /*componentWillUnmount() {
         console.log('---', 'unmounting');
     };
 
@@ -30,5 +30,5 @@ export default OriginalComponent => class WrappedComponent extends ReactComponen
 
     componentDidUpdate() {
         console.log('---', 'updated');
-    };
+    };*/
 };

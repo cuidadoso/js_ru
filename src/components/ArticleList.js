@@ -32,7 +32,6 @@ class ArticleList extends Component {
 }
 
 export default connect((state) => {
-
     return {
         articles: filtrateArticlesSelector(state)
     }

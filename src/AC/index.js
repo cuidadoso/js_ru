@@ -1,4 +1,11 @@
-import {DELETE_ARTICLE, INCREMENT, SET_SELECTION, SET_RANGE, RESET_DATE_RANGE, RESET_FILTERS} from '../constatns';
+import {
+    DELETE_ARTICLE,
+    INCREMENT,
+    SET_SELECTION,
+    SET_RANGE,
+    RESET_DATE_RANGE,
+    RESET_FILTERS,
+    ADD_COMMENT} from '../constatns';
 
 export function increment() {
     return {
@@ -42,5 +49,16 @@ export function resetDateRange() {
 export function resetFilters() {
     return {
         type: RESET_FILTERS
+    }
+}
+
+export function addComment(comment, articleId) {
+    return {
+        type: ADD_COMMENT,
+        payload: {
+            comment,
+            articleId
+        },
+        generateId: true
     }
 }

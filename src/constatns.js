@@ -9,3 +9,5 @@ export const SET_RANGE = 'SET_RANGE';
 export const RESET_DATE_RANGE = 'RESET_DATE_RANGE';
 
 export const RESET_FILTERS = 'RESET_FILTERS';
+
+export const ADD_COMMENT = 'ADD_COMMENT';
