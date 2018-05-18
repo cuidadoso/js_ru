@@ -2,10 +2,7 @@ import {normalizedComments as defaultComments} from '../data';
 import {} from '../constatns';
 import {arrToMap} from '../helpers';
 
-
-const commentsMap = arrToMap(defaultComments);
-
-export default (commentState = commentsMap, action) => {
+export default (commentState = arrToMap(defaultComments), action) => {
     const {type, payload} = action;
     switch (type) {
         default:
