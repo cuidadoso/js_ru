@@ -5,6 +5,7 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import {setSelection} from '../../AC';
+import {mapToArr} from '../../helpers';
 
 class SelectFilter extends Component {
   static propTypes = {
@@ -36,6 +37,6 @@ class SelectFilter extends Component {
 }
 
 export default connect(state => ({
-    articles: state.articles,
+    articles: mapToArr(state.articles),
     selection: state.filters.selection
 }), { setSelection })(SelectFilter);

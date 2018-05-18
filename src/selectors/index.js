@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import comments from "../reducer/comments";
+import {mapToArr} from '../helpers';
 
 const articlesGetter = state => state.articles;
 const filtersGetter = state => state.filters;
@@ -11,7 +11,7 @@ export const filtrateArticlesSelector = createSelector(
     filtersGetter,
     (articles, filters) => {
         const {selection, dateRange: {from, to}} = filters;
-        return articles.filter(article => {
+        return mapToArr(articles).filter(article => {
             const published = Date.parse(article.date);
             return (!selection.length || selection.includes(article.id)) &&
                 (!from || !to || (published > from && published < to));
