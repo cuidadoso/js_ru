@@ -1,27 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class ArticleChart extends Component {
-    static propTypes = {
+  static propTypes = {};
 
-    };
+  componentWillReceiveProps(nextProps) {
+    // update chart for new articles
+  }
 
-    componentWillReceiveProps(nextProps) {
-        // update chart for new articles
-    };
+  render() {
+    return <div ref="chart" />;
+  }
 
-    render() {
-        return(
-            <div ref = 'chart'/>
-        );
-    };
+  componentDidMount() {
+    // d3 works with this.refs.chart
+  }
 
-    componentDidMount() {
-        // d3 works with this.refs.chart
-    };
-
-    componentWillUnmount() {
-        // do same clean
-    };
+  componentWillUnmount() {
+    // do same clean
+  }
 }
 
 export default ArticleChart;
