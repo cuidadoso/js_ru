@@ -5,11 +5,13 @@ import {connect} from 'react-redux';
 import {Article} from './';
 import {accordion} from '../decorators';
 import {filtrateArticlesSelector} from '../selectors';
+import {loadAllArticles} from '../AC'
 
 class ArticleList extends Component {
     static propTypes = {
         // from connect
         articles: PropTypes.array.isRequired,
+        loadAllArticles: PropTypes.func,
         // from accordion
         openItemId: PropTypes.string,
         toggleOpen: PropTypes.func.isRequired
@@ -29,10 +31,14 @@ class ArticleList extends Component {
             </ul>
         );
     };
+
+    componentDidMount() {
+        this.props.loadAllArticles();
+    }
 }
 
 export default connect((state) => {
     return {
         articles: filtrateArticlesSelector(state)
     }
-})(accordion(ArticleList));
+}, {loadAllArticles})(accordion(ArticleList));

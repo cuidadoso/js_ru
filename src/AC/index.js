@@ -5,7 +5,8 @@ import {
     SET_RANGE,
     RESET_DATE_RANGE,
     RESET_FILTERS,
-    ADD_COMMENT} from '../constatns';
+    ADD_COMMENT,
+    LOAD_ALL_ARTICLES} from '../constatns';
 
 export function increment() {
     return {
@@ -60,5 +61,12 @@ export function addComment(comment, articleId) {
             articleId
         },
         generateId: true
+    }
+}
+
+export function loadAllArticles() {
+    return {
+        type: LOAD_ALL_ARTICLES,
+        callApi: '/api/article'
     }
 }
