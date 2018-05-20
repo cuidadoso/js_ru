@@ -7,6 +7,7 @@ import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 import Counter from './Counter';
 import Filters from './Filters';
+import Loader from './Loader';
 import Root from './Root';
 import UserForm from './UserForm';
 
@@ -20,6 +21,7 @@ export {
   CommentList,
   Counter,
   Filters,
+  Loader,
   Root,
   UserForm
 };
