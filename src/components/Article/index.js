@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group';
 
-import { CommentList } from '../';
-import { deleteArticle } from '../../AC';
+import { CommentList, Loader } from '../';
+import { deleteArticle, loadArticle } from '../../AC';
 
 import './style.css';
 
@@ -26,24 +26,23 @@ class Article extends PureComponent {
   getBody = () => {
     const { article, isOpen } = this.props;
     if (!isOpen) return null;
+    if (article.loading) return <Loader />;
     return (
-      <div>
-        <section>
-          {article.text}
-          <button
-            onClick={() =>
-              this.setState({ updateIndex: this.state.updateIndex + 1 })
-            }
-          >
-            update
-          </button>
-          <CommentList
-            article={article}
-            ref={this.setCommentRef}
-            key={this.state.updateIndex}
-          />
-        </section>
-      </div>
+      <section>
+        {article.text}
+        <button
+          onClick={() =>
+            this.setState({ updateIndex: this.state.updateIndex + 1 })
+          }
+        >
+          update
+        </button>
+        <CommentList
+          article={article}
+          ref={this.setCommentRef}
+          key={this.state.updateIndex}
+        />
+      </section>
     );
   };
 
@@ -64,6 +63,10 @@ class Article extends PureComponent {
     const { deleteArticle, article } = this.props;
     deleteArticle(article.id);
   };
+
+  componentWillReceiveProps({ isOpen, loadArticle, article }) {
+    if (isOpen && !article.text && !article.loading) loadArticle(article.id);
+  }
 
   render() {
     const { article, isOpen, toggleOpen } = this.props;
@@ -87,4 +90,4 @@ class Article extends PureComponent {
   }
 }
 
-export default connect(null, { deleteArticle })(Article);
+export default connect(null, { deleteArticle, loadArticle })(Article);
