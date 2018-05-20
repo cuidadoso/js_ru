@@ -1,24 +1,29 @@
+import { Map, Record } from 'immutable';
+
 import { ADD_COMMENT, DELETE_ARTICLE, LOAD_ALL_ARTICLES } from '../constatns';
 import { arrToMap } from '../helpers';
 
-export default (articleState = {}, action) => {
+const ArticleModel = Record({
+  text: undefined,
+  title: '',
+  id: undefined,
+  comments: []
+});
+
+const defaultSate = new Map({});
+
+export default (articleState = defaultSate, action) => {
   const { type, payload, randomId, response } = action;
   switch (type) {
     case DELETE_ARTICLE:
-      const tempState = { ...articleState };
-      delete tempState[payload.id];
-      return tempState;
+      return articleState.delete(payload.id);
     case ADD_COMMENT:
-      const article = articleState[payload.articleId];
-      return {
-        ...articleState,
-        [payload.articleId]: {
-          ...article,
-          comments: (article.comments || []).concat(randomId)
-        }
-      };
+      return articleState.updateIn(
+        [payload.articleId, 'comments'],
+        (comments) => comments.concat(randomId)
+      );
     case LOAD_ALL_ARTICLES:
-      return arrToMap(response);
+      return arrToMap(response, ArticleModel);
     default:
       return articleState;
   }
