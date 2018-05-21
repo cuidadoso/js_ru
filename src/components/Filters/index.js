@@ -7,8 +7,8 @@ class Filters extends Component {
   render() {
     return (
       <div>
-          <SelectFilter />
-          <DateRange />
+        <SelectFilter />
+        <DateRange />
       </div>
     );
   }
