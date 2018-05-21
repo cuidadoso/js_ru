@@ -10,7 +10,8 @@ import {
   LOAD_ARTICLE,
   START,
   SUCCESS,
-  FAIL
+  FAIL,
+  LOAD_ALL_COMMENTS
 } from '../constatns';
 
 export function increment() {
@@ -110,3 +111,10 @@ export function loadArticle(id) {
   }
 }
 */
+
+export function loadAllComments() {
+  return {
+    type: LOAD_ALL_COMMENTS,
+    callApi: '/api/comment'
+  };
+}

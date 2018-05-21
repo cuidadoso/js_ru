@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import { Article, Loader } from './';
 import { accordion } from '../decorators';
 import { filtrateArticlesSelector } from '../selectors';
-import { loadAllArticles } from '../AC';
+import { loadAllArticles, loadAllComments } from '../AC';
 
 class ArticleList extends Component {
   static propTypes = {
     // from connect
     articles: PropTypes.array.isRequired,
     loadAllArticles: PropTypes.func,
+    loadAllComments: PropTypes.func,
     // from accordion
     openItemId: PropTypes.string,
     toggleOpen: PropTypes.func.isRequired
@@ -33,8 +34,11 @@ class ArticleList extends Component {
   }
 
   componentDidMount() {
-    const { loaded, loading, loadAllArticles } = this.props;
-    if (!loaded || !loading) loadAllArticles();
+    const { loaded, loading, loadAllArticles, loadAllComments } = this.props;
+    if (!loaded || !loading) {
+      loadAllArticles();
+      loadAllComments();
+    }
   }
 }
 
@@ -46,5 +50,5 @@ export default connect(
       loaded: state.articles.loaded
     };
   },
-  { loadAllArticles }
+  { loadAllArticles, loadAllComments }
 )(accordion(ArticleList));

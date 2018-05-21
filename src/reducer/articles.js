@@ -1,5 +1,6 @@
 import { Record, OrderedMap } from 'immutable';
 
+import { arrToMap } from '../helpers';
 import {
   ADD_COMMENT,
   DELETE_ARTICLE,
@@ -8,7 +9,6 @@ import {
   START,
   SUCCESS
 } from '../constatns';
-import { arrToMap } from '../helpers';
 
 const ArticleRecord = Record({
   text: undefined,
