@@ -11,7 +11,7 @@ import {
   START,
   SUCCESS,
   FAIL,
-  LOAD_ALL_COMMENTS
+  LOAD_ARTICLE_COMMENTS
 } from '../constatns';
 
 export function increment() {
@@ -112,9 +112,10 @@ export function loadArticle(id) {
 }
 */
 
-export function loadAllComments() {
+export function loadArticleComments(articleId) {
   return {
-    type: LOAD_ALL_COMMENTS,
-    callApi: '/api/comment'
+    type: LOAD_ARTICLE_COMMENTS,
+    callApi: `/api/comment?article=${articleId}`,
+    payload: { articleId }
   };
 }

@@ -6,6 +6,7 @@ import {
   DELETE_ARTICLE,
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
+  LOAD_ARTICLE_COMMENTS,
   START,
   SUCCESS
 } from '../constatns';
@@ -15,6 +16,8 @@ const ArticleRecord = Record({
   title: '',
   id: undefined,
   loading: false,
+  commentsLoading: false,
+  commentsLoaded: false,
   comments: []
 });
 
@@ -49,6 +52,14 @@ export default (articleState = defaultSate, action) => {
       return articleState
         .setIn(['entities', payload.id, 'loading'], false)
         .setIn(['entities', payload.id], new ArticleRecord(payload.response));
+    case LOAD_ARTICLE_COMMENTS + START:
+      return articleState
+        .setIn(['entities', payload.articleId, 'commentsLoading'], true)
+        .setIn(['entities', payload.articleId, 'commentsLoaded'], false);
+    case LOAD_ARTICLE_COMMENTS + SUCCESS:
+      return articleState
+        .setIn(['entities', payload.articleId, 'commentsLoading'], false)
+        .setIn(['entities', payload.articleId, 'commentsLoaded'], true);
     default:
       return articleState;
   }
