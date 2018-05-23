@@ -4,7 +4,8 @@ import { Route } from 'react-router-dom';
 import { Article, ArticleList } from '../';
 
 class Articles extends Component {
-  getIndex = () => {
+  getIndex = ({ match }) => {
+    if (!match) return <h2>Article page: </h2>;
     return <h2>Please select article</h2>;
   };
 
@@ -17,7 +18,7 @@ class Articles extends Component {
     return (
       <div>
         <ArticleList />
-        <Route path="/articles/" render={this.getIndex} exact />
+        <Route path="/articles/" children={this.getIndex} exact />
         <Route path="/articles/:id" render={this.getArticle} />
       </div>
     );
