@@ -10,11 +10,13 @@ import './style.css';
 
 class Article extends PureComponent {
   static propTypes = {
+    id: PropTypes.string.isRequired,
+    // from connect
     article: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
+      id: PropTypes.string,
+      title: PropTypes.string,
       text: PropTypes.string
-    }).isRequired,
+    }),
     isOpen: PropTypes.bool,
     toggleOpen: PropTypes.func
   };
@@ -64,13 +66,15 @@ class Article extends PureComponent {
     deleteArticle(article.id);
   };
 
-  componentWillReceiveProps({ isOpen, loadArticle, article }) {
-    if (isOpen && !article.text && !article.loading) loadArticle(article.id);
+  componentDidMount() {
+    const { loadArticle, article, id } = this.props;
+    if (!article || (!article.text && !article.loading)) loadArticle(id);
   }
 
   render() {
     const { article, isOpen, toggleOpen } = this.props;
-    // console.log('---', 'rendering article');
+    if (!article) return null;
+
     return (
       <div ref={this.setContainerRef}>
         <h3>{article.title}</h3>
@@ -90,4 +94,9 @@ class Article extends PureComponent {
   }
 }
 
-export default connect(null, { deleteArticle, loadArticle })(Article);
+export default connect(
+  (state, ownProps) => ({
+    article: state.articles.entities.get(ownProps.id)
+  }),
+  { deleteArticle, loadArticle }
+)(Article);

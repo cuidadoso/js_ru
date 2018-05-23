@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
-import { Article, Loader } from './';
-import { accordion } from '../decorators';
+import { Loader } from './';
 import { filtrateArticlesSelector } from '../selectors';
 import { loadAllArticles } from '../AC';
 
@@ -11,22 +11,17 @@ class ArticleList extends Component {
   static propTypes = {
     // from connect
     articles: PropTypes.array.isRequired,
-    loadAllArticles: PropTypes.func,
-    // from accordion
-    openItemId: PropTypes.string,
-    toggleOpen: PropTypes.func.isRequired
+    loadAllArticles: PropTypes.func
   };
 
   render() {
-    const { articles, openItemId, toggleOpen, loading } = this.props;
+    const { articles, loading } = this.props;
     if (loading) return <Loader />;
     const articleElements = articles.map((article) => (
       <li key={article.id}>
-        <Article
-          article={article}
-          isOpen={article.id === openItemId}
-          toggleOpen={toggleOpen(article.id)}
-        />
+        <NavLink to={`/articles/${article.id}`} activeStyle={{ color: 'red' }}>
+          {article.title}
+        </NavLink>
       </li>
     ));
     return <ul>{articleElements}</ul>;
@@ -47,4 +42,4 @@ export default connect(
     };
   },
   { loadAllArticles }
-)(accordion(ArticleList));
+)(ArticleList);

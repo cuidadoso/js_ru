@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 
-import { ArticleList, Counter, Filters, UserForm } from './';
+import { Counter, Filters, UserForm } from './';
+import { ArticlesRoute } from './routes';
 
 class App extends Component {
   render() {
@@ -29,7 +30,7 @@ class App extends Component {
           <UserForm />
           <Route path="/counter" component={Counter} />
           <Route path="/filters" component={Filters} />
-          <Route path="/articles" component={ArticleList} />
+          <Route path="/articles" component={ArticlesRoute} />
         </div>
       </Router>
     );
