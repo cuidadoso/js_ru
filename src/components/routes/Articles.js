@@ -4,12 +4,6 @@ import { Route } from 'react-router-dom';
 import { Article, ArticleList } from '../';
 
 class Articles extends Component {
-  static defaultProps = {};
-
-  static propTypes = {};
-
-  state = {};
-
   getIndex = () => {
     return <h2>Please select article</h2>;
   };

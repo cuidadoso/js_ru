@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Switch
+} from 'react-router-dom';
 
 import { Counter, Filters, UserForm } from './';
-import { ArticlesRoute } from './routes';
+import { ArticlesRoute, NotFoundRoute } from './routes';
 
 class App extends Component {
   render() {
@@ -28,9 +33,12 @@ class App extends Component {
             </div>
           </div>
           <UserForm />
-          <Route path="/counter" component={Counter} />
-          <Route path="/filters" component={Filters} />
-          <Route path="/articles" component={ArticlesRoute} />
+          <Switch>
+            <Route path="/counter" component={Counter} />
+            <Route path="/filters" component={Filters} />
+            <Route path="/articles" component={ArticlesRoute} />
+            <Route path="*" component={NotFoundRoute} />
+          </Switch>
         </div>
       </Router>
     );
