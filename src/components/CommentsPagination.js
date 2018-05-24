@@ -10,12 +10,12 @@ class CommentsPagination extends Component {
   static defaultProps = {};
 
   static propTypes = {
-    page: PropTypes.string
+    page: PropTypes.string,
     // from connect
-    /*total: PropTypes.number,
+    total: PropTypes.number,
     loading: PropTypes.bool,
     comments: PropTypes.array,
-    checkAndLoadCommentsForPage: PropTypes.func*/
+    checkAndLoadCommentsForPage: PropTypes.func
   };
 
   getCommentItems() {
