@@ -5,6 +5,7 @@ import ArticleList from './ArticleList';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
+import CommentsPagination from './CommentsPagination';
 import Counter from './Counter';
 import Filters from './Filters';
 import Loader from './Loader';
@@ -19,6 +20,7 @@ export {
   Comment,
   CommentForm,
   CommentList,
+  CommentsPagination,
   Counter,
   Filters,
   Loader,

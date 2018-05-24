@@ -1,16 +1,24 @@
-import { Record, OrderedMap } from 'immutable';
+import { Map, Record, OrderedMap } from 'immutable';
 
 import { arrToMap } from '../helpers';
-import { ADD_COMMENT, LOAD_ARTICLE_COMMENTS, SUCCESS } from '../constatns';
+import {
+  ADD_COMMENT,
+  LOAD_ARTICLE_COMMENTS,
+  LOAD_COMMENTS_FOR_PAGE,
+  START,
+  SUCCESS
+} from '../constatns';
 
 const CommentRecord = Record({
-  text: undefined,
-  user: undefined,
-  id: undefined
+  id: null,
+  text: null,
+  user: null
 });
 
 const ReducerState = new Record({
-  entities: new OrderedMap({})
+  entities: new OrderedMap({}),
+  pagination: new Map({}),
+  total: null
 });
 
 const defaultSate = new ReducerState();
@@ -22,6 +30,17 @@ export default (commentState = defaultSate, action) => {
       return commentState.update('entities', (entities) =>
         entities.merge(arrToMap(response, CommentRecord))
       );
+    case LOAD_COMMENTS_FOR_PAGE + START:
+      return commentState.setIn(['pagination', payload.page, 'loading'], true);
+    case LOAD_COMMENTS_FOR_PAGE + SUCCESS:
+      return commentState
+        .set('total', response.total)
+        .mergeIn(['entities'], arrToMap(response.records, CommentRecord))
+        .setIn(
+          ['pagination', payload.page, 'ids'],
+          response.records.map((comment) => comment.id)
+        )
+        .setIn(['pagination', payload.page, 'loading'], false);
     case ADD_COMMENT:
       return commentState.setIn(
         ['entities', randomId],

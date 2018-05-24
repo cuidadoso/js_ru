@@ -11,7 +11,8 @@ import {
   START,
   SUCCESS,
   FAIL,
-  LOAD_ARTICLE_COMMENTS
+  LOAD_ARTICLE_COMMENTS,
+  LOAD_COMMENTS_FOR_PAGE
 } from '../constatns';
 
 export function increment() {
@@ -117,5 +118,21 @@ export function loadArticleComments(articleId) {
     type: LOAD_ARTICLE_COMMENTS,
     callApi: `/api/comment?article=${articleId}`,
     payload: { articleId }
+  };
+}
+
+export function checkAndLoadCommentsForPage(page) {
+  return (dispatch, getState) => {
+    const {
+      comments: { pagination }
+    } = getState();
+    if (pagination.getIn([page, 'loading']) || pagination.getIn([page, 'ids']))
+      return;
+
+    dispatch({
+      type: LOAD_COMMENTS_FOR_PAGE,
+      payload: { page },
+      callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
+    });
   };
 }

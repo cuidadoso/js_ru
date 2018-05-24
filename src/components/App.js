@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { Counter, Filters, UserForm } from './';
-import { ArticlesRoute, NotFoundRoute } from './routes';
+import { ArticlesRoute, NotFoundRoute, CommentsPageRoute } from './routes';
 
 class App extends Component {
   render() {
@@ -37,6 +37,7 @@ class App extends Component {
             <Route path="/counter" component={Counter} />
             <Route path="/filters" component={Filters} />
             <Route path="/articles" component={ArticlesRoute} />
+            <Route path="/comments/:page" component={CommentsPageRoute} />
             <Route path="*" component={NotFoundRoute} />
           </Switch>
         </div>
