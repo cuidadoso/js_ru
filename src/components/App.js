@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Route,
   NavLink,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 
 import { Counter, Filters, UserForm } from './';
@@ -37,7 +38,8 @@ class App extends Component {
             <Route path="/counter" component={Counter} />
             <Route path="/filters" component={Filters} />
             <Route path="/articles" component={ArticlesRoute} />
-            <Route path="/comments/:page" component={CommentsPageRoute} />
+            <Route path="/comments" component={CommentsPageRoute} />
+            {/*<Redirect from = '/comments/' to = '/comments/1' />*/}
             <Route path="*" component={NotFoundRoute} />
           </Switch>
         </div>
