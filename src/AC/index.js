@@ -132,7 +132,7 @@ export function checkAndLoadCommentsForPage(page) {
     dispatch({
       type: LOAD_COMMENTS_FOR_PAGE,
       payload: { page },
-      callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
+      callApi: `/api/comment?limit=5&offset=${(page - 1) * 5}`
     });
   };
 }

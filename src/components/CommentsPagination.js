@@ -41,6 +41,7 @@ class CommentsPagination extends Component {
         </li>
       );
     }
+    return <ul>{items}</ul>;
   }
 
   componentWillMount() {
