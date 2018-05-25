@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  NavLink,
-  Switch,
-  Redirect
-} from 'react-router-dom';
+import { Router, Route, NavLink, Switch } from 'react-router-dom';
+
+import history from '../history';
 
 import { Counter, Filters, UserForm } from './';
 import { ArticlesRoute, NotFoundRoute, CommentsPageRoute } from './routes';
@@ -13,7 +9,7 @@ import { ArticlesRoute, NotFoundRoute, CommentsPageRoute } from './routes';
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div>
           <div>
             <h2>Main menu</h2>
