@@ -5,7 +5,7 @@ import { CommentsPagination } from '../';
 
 function CommentsPage({ match }) {
   if (match.isExact) return <Redirect to="/comments/1" />;
-  return <Route path="/comments" render={getCommentsPaginator} />;
+  return <Route path="/comments/:page" render={getCommentsPaginator} />;
 }
 
 function getCommentsPaginator({ match }) {
