@@ -1,3 +1,5 @@
+import { push, replace } from 'react-router-redux';
+
 import {
   DELETE_ARTICLE,
   INCREMENT,
@@ -87,19 +89,25 @@ export function loadArticle(id) {
 
     setTimeout(() => {
       fetch(`/api/article/${id}`)
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status >= 400) {
+            throw new Error(res.statusText);
+          }
+          return res.json();
+        })
         .then((response) =>
           dispatch({
             type: LOAD_ARTICLE + SUCCESS,
             payload: { id, response }
           })
         )
-        .catch((error) =>
+        .catch((error) => {
           dispatch({
             type: LOAD_ARTICLE + FAIL,
             payload: { id, error }
-          })
-        );
+          });
+          dispatch(replace('/error'));
+        });
     }, 1000);
   };
 }
