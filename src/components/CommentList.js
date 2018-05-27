@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Comment, CommentForm } from './';
 import { toggleOpen } from '../decorators';
 import { loadArticleComments } from '../AC';
-import { Loader } from './';
+import { Loader, LocolizedText } from './';
 
 class CommentList extends Component {
   static contextTypes = {
@@ -33,7 +33,9 @@ class CommentList extends Component {
     if (!comments.length) {
       return (
         <div>
-          <p>No comments yet</p>
+          <p>
+            <LocolizedText>No comments yet</LocolizedText>
+          </p>
           <CommentForm articleId={id} />
         </div>
       );
@@ -65,7 +67,11 @@ class CommentList extends Component {
 
   render() {
     const { isOpen, article, toggleOpen } = this.props;
-    const buttonText = isOpen ? 'hide comments' : 'show comments';
+    const buttonText = isOpen ? (
+      <LocolizedText>hide comments</LocolizedText>
+    ) : (
+      <LocolizedText>show comments</LocolizedText>
+    );
     return (
       <div>
         <h3>User: {this.context.user}</h3>

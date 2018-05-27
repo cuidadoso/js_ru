@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group';
 
-import { CommentList, Loader } from '../';
+import { CommentList, Loader, LocolizedText } from '../';
 import { deleteArticle, loadArticle } from '../../AC';
 
 import './style.css';
@@ -79,7 +79,9 @@ class Article extends Component {
       <div ref={this.setContainerRef}>
         <h3>{article.title}</h3>
         <button onClick={toggleOpen}>{isOpen ? 'close' : 'open'}</button>
-        <button onClick={this.handleDelete}>Delete me</button>
+        <button onClick={this.handleDelete}>
+          <LocolizedText>delete me</LocolizedText>
+        </button>
         <CSSTransitionGroup
           transitionName="article"
           transitionAppear={true}
