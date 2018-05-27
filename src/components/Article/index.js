@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group';
@@ -8,7 +8,7 @@ import { deleteArticle, loadArticle } from '../../AC';
 
 import './style.css';
 
-class Article extends PureComponent {
+class Article extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     // from connect
@@ -98,5 +98,7 @@ export default connect(
   (state, ownProps) => ({
     article: state.articles.entities.get(ownProps.id)
   }),
-  { deleteArticle, loadArticle }
+  { deleteArticle, loadArticle },
+  null,
+  { pure: false }
 )(Article);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Route, NavLink, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 
@@ -7,6 +8,26 @@ import { Counter, Filters, UserForm } from './';
 import { ArticlesRoute, NotFoundRoute, CommentsPageRoute } from './routes';
 
 class App extends Component {
+  static childContextTypes = {
+    user: PropTypes.string
+  };
+
+  state = {
+    userName: ''
+  };
+
+  getChildContext() {
+    return {
+      user: this.state.userName
+    };
+  }
+
+  handleUserChange = (userName) => {
+    this.setState({
+      userName
+    });
+  };
+
   render() {
     return (
       <ConnectedRouter history={history}>
@@ -29,7 +50,10 @@ class App extends Component {
               </NavLink>
             </div>
           </div>
-          <UserForm />
+          <UserForm
+            value={this.state.userName}
+            onChange={this.handleUserChange}
+          />
           <Switch>
             <Route path="/counter" component={Counter} />
             <Route path="/filters" component={Filters} />
