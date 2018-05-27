@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Router, Route, NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 
 import history from '../history';
-
 import { Counter, Filters, UserForm } from './';
 import { ArticlesRoute, NotFoundRoute, CommentsPageRoute } from './routes';
 
 class App extends Component {
   render() {
     return (
-      <Router history={history}>
+      <ConnectedRouter history={history}>
         <div>
           <div>
             <h2>Main menu</h2>
@@ -39,7 +39,7 @@ class App extends Component {
             <Route path="*" component={NotFoundRoute} />
           </Switch>
         </div>
-      </Router>
+      </ConnectedRouter>
     );
   }
 }
