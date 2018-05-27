@@ -43,7 +43,9 @@ export default (articleState = defaultSate, action) => {
       return articleState.set('loading', true).set('loaded', false);
     case LOAD_ALL_ARTICLES + SUCCESS:
       return articleState
-        .set('entities', arrToMap(response, ArticleRecord))
+        .update('entities', (entities) =>
+          arrToMap(response, ArticleRecord).merge(entities)
+        )
         .set('loading', false)
         .set('loaded', true);
     case LOAD_ARTICLE + START:
